@@ -1,0 +1,13 @@
+postgres:
+  uri: postgres://postgres:postgres@localhost:5432/analytics
+
+aws:
+  s3_bucket: s3-bucket-name
+  s3_path: s3-bucket/path
+  access_key_id: ACCESSKEYID
+  secret_access_key: SECRETACCESSKEY
+  region: us-east-1
+
+query:
+  loop_query: SELECT DISTINCT date_trunc('month', created_at) AS distinct_value FROM my_table;
+  export_query: SELECT * FROM my_table WHERE created_at BETWEEN '{distinct_value}'::date AND '{distinct_value}'::date + '1 month'::interval
